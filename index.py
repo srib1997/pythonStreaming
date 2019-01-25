@@ -7,10 +7,9 @@ import base64
 import threading
 
 cap0 = cv2.VideoCapture(0)
-cap0.set(3,320)
-cap0.set(4,240)
+cap0.set(3,180)
+cap0.set(4,180)
 loop = asyncio.get_event_loop()
-#sio = socketio.AsyncClient()
 sio = socketio.Client()
 start_timer = None
 
@@ -44,7 +43,6 @@ def gg():
     retval, image = cap0.read()
     retval, buffer = cv2.imencode('.jpg', image)
     jpg_as_text = base64.b64encode(buffer)
-    # print (jpg_as_text)
     sio.emit('kawang boot', jpg_as_text)
 
 @sio.on('connect')
